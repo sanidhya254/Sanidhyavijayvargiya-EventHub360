@@ -1,0 +1,8 @@
+node_modules/
+dist/
+server/uploads/
+.env
+.DS_Store
+npm-debug.log*
+scripts-generate-docs.mjs
+scripts-generate-pdf.py
