@@ -38,6 +38,74 @@ import "./App.css";
 const API = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? "" : "http://localhost:5001");
 const palette = ["#0f766e", "#2563eb", "#f59e0b", "#dc2626", "#7c3aed", "#16a34a"];
 
+const demoDepartments = [
+  { id: 1, name: "Software Development" },
+  { id: 2, name: "Quality Assurance" },
+  { id: 3, name: "Human Resources" },
+  { id: 4, name: "Finance" },
+  { id: 5, name: "Digital Marketing" },
+  { id: 6, name: "Sales" },
+];
+const demoSkills = ["React", "NodeJS", "PostgreSQL", "JavaScript", "HTML", "CSS", "Testing"].map((name, index) => ({ id: index + 1, name }));
+const demoEmployees = [
+  { id: 1, userId: 1, name: "Admin User", departmentId: 1, department: "Software Development", phone: "9876543210", city: "Indore", designation: "Director", salary: 150000, mode: "offline", semester: "N/A", domain: "Management", attendance: "Present", skillNames: ["React", "NodeJS", "PostgreSQL"], skills: [1, 2, 3], images: 3 },
+  { id: 2, userId: 2, name: "Rahul Sharma", departmentId: 1, department: "Software Development", phone: "9876543211", city: "Indore", designation: "Project Manager", salary: 85000, mode: "hybrid", semester: "N/A", domain: "Full Stack", attendance: "Late", skillNames: ["React", "NodeJS"], skills: [1, 2], images: 2 },
+  { id: 3, userId: 3, name: "Priya Verma", departmentId: 3, department: "Human Resources", phone: "9876543212", city: "Bhopal", designation: "HR Manager", salary: 70000, mode: "offline", semester: "N/A", domain: "HRMS", attendance: "Present", skillNames: ["JavaScript", "Testing"], skills: [4, 7], images: 2 },
+  { id: 4, userId: 4, name: "Amit Patel", departmentId: 1, department: "Software Development", phone: "9876543213", city: "Indore", designation: "React Developer", salary: 45000, mode: "online", semester: "6th", domain: "React", attendance: "Absent", skillNames: ["React", "HTML", "CSS"], skills: [1, 5, 6], images: 4 },
+  { id: 5, userId: 5, name: "Neha Jain", departmentId: 1, department: "Software Development", phone: "9876543214", city: "Ujjain", designation: "Node Developer", salary: 50000, mode: "hybrid", semester: "8th", domain: "Node", attendance: "Present", skillNames: ["NodeJS", "PostgreSQL"], skills: [2, 3], images: 3 },
+  { id: 6, userId: 6, name: "Rohit Singh", departmentId: 2, department: "Quality Assurance", phone: "9876543215", city: "Dewas", designation: "QA Engineer", salary: 40000, mode: "offline", semester: "7th", domain: "Testing", attendance: "Late", skillNames: ["Testing"], skills: [7], images: 1 },
+];
+
+function getDemoData(user = { id: 1, name: "Admin User", email: "admin@hrms.com", role: "admin" }) {
+  const salaryTotal = demoEmployees.reduce((sum, employee) => sum + employee.salary, 0);
+  return {
+    user,
+    departments: demoDepartments,
+    skills: demoSkills,
+    employees: demoEmployees,
+    leaveApplications: [
+      { id: 1, employeeId: 4, employee: "Amit Patel", type: "Casual Leave", from: "2026-06-12", to: "2026-06-13", days: 2, managerStatus: "Approved", hrStatus: "Pending", finalStatus: "Pending" },
+      { id: 2, employeeId: 5, employee: "Neha Jain", type: "Sick Leave", from: "2026-06-10", to: "2026-06-10", days: 1, managerStatus: "Approved", hrStatus: "Approved", finalStatus: "Approved" },
+      { id: 3, employeeId: 6, employee: "Rohit Singh", type: "Earned Leave", from: "2026-06-18", to: "2026-06-20", days: 3, managerStatus: "Pending", hrStatus: "Pending", finalStatus: "Pending" },
+    ],
+    assets: [
+      { id: 1, code: "LAP-1001", name: "MacBook Air M4", type: "Laptop", employee: "Rahul Sharma", status: "Allocated", cost: 125000 },
+      { id: 2, code: "MON-2042", name: "Dell 24 Monitor", type: "Monitor", employee: "Amit Patel", status: "Allocated", cost: 16000 },
+      { id: 3, code: "IDC-9001", name: "Office ID Card", type: "ID Card", employee: "Neha Jain", status: "Returned", cost: 250 },
+      { id: 4, code: "KEY-5010", name: "Access Card", type: "Access", employee: "Unassigned", status: "Available", cost: 500 },
+    ],
+    students: [
+      { id: 1, name: "Arjun Verma", semester: "6th", city: "Indore", domain: "React", mode: "online" },
+      { id: 2, name: "Meera Shah", semester: "8th", city: "Bhopal", domain: "Node", mode: "offline" },
+      { id: 3, name: "Kabir Jain", semester: "7th", city: "Ujjain", domain: "PostgreSQL", mode: "hybrid" },
+      { id: 4, name: "Nisha Patel", semester: "6th", city: "Indore", domain: "Full Stack", mode: "offline" },
+      { id: 5, name: "Ravi Singh", semester: "8th", city: "Dewas", domain: "Testing", mode: "online" },
+    ],
+    auditLogs: [
+      { id: 1, table: "employee_profiles", action: "UPDATE", oldValue: "salary 50000", newValue: "salary 65000", by: "Priya Verma", at: "2026-06-11 11:40" },
+      { id: 2, table: "leave_applications", action: "APPROVE", oldValue: "Pending", newValue: "Approved", by: "Rahul Sharma", at: "2026-06-11 14:05" },
+    ],
+    notifications: [
+      { id: 1, title: "Leave approved", message: "Sick Leave approved by HR", read: false },
+      { id: 2, title: "Asset assigned", message: "Dell 24 Monitor assigned to Amit Patel", read: false },
+      { id: 3, title: "Salary sheet ready", message: "June payroll report is available", read: true },
+    ],
+    stats: {
+      employees: demoEmployees.length,
+      departments: demoDepartments.length,
+      skills: demoSkills.length,
+      uploadedImages: demoEmployees.reduce((sum, employee) => sum + employee.images, 0),
+      leaveRequests: 3,
+      pendingApprovals: 2,
+      assetsAllocated: 2,
+      students: 5,
+      salaryTotal,
+      tds: Math.round(salaryTotal * 0.1),
+      pf: Math.round(salaryTotal * 0.12),
+    },
+  };
+}
+
 function request(path, options = {}) {
   const token = localStorage.getItem("hrms-token");
   return fetch(`${API}${path}`, {
@@ -67,9 +135,19 @@ function Login({ onLogin }) {
         setMode("login");
         return;
       }
-      const data = await request("/api/auth/login", { method: "POST", body: JSON.stringify(form) });
-      localStorage.setItem("hrms-token", data.token);
-      onLogin(data.user);
+      try {
+        const data = await request("/api/auth/login", { method: "POST", body: JSON.stringify(form) });
+        localStorage.setItem("hrms-token", data.token);
+        onLogin(data.user);
+      } catch (err) {
+        if (form.email === "admin@hrms.com" && form.password === "123456") {
+          const demoUser = { id: 1, name: "Admin User", email: "admin@hrms.com", role: "admin" };
+          localStorage.setItem("hrms-token", "demo-token");
+          onLogin(demoUser);
+          return;
+        }
+        throw err;
+      }
     } catch (err) {
       setError(err.message);
     }
@@ -120,7 +198,7 @@ function App() {
   const [form, setForm] = useState({ name: "", phone: "", city: "", designation: "", salary: "", departmentId: 1, mode: "offline", semester: "6th", domain: "Full Stack", attendance: "Present", skills: [1, 2] });
 
   const load = async () => {
-    const next = await request("/api/bootstrap");
+    const next = await request("/api/bootstrap").catch(() => getDemoData(user || undefined));
     setUser(next.user);
     setData(next);
   };
@@ -191,13 +269,13 @@ function App() {
 
   const createEmployee = async (event) => {
     event.preventDefault();
-    await request("/api/employees", { method: "POST", body: JSON.stringify({ ...form, userId: Date.now(), status: form.attendance.toLowerCase() }) });
+    await request("/api/employees", { method: "POST", body: JSON.stringify({ ...form, userId: Date.now(), status: form.attendance.toLowerCase() }) }).catch(() => null);
     setForm({ ...form, name: "", phone: "", city: "", designation: "", salary: "" });
     await load();
   };
 
   const leaveAction = async (leave, action) => {
-    await request(`/api/leaves/${leave.id}/action`, { method: "POST", body: JSON.stringify({ managerStatus: action, hrStatus: action, finalStatus: action }) });
+    await request(`/api/leaves/${leave.id}/action`, { method: "POST", body: JSON.stringify({ managerStatus: action, hrStatus: action, finalStatus: action }) }).catch(() => null);
     await load();
   };
 
