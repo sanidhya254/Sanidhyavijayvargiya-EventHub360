@@ -88,6 +88,17 @@ Database: pending Neon PostgreSQL connection
 - `docs/PROJECT_DOCUMENTATION.pdf` for final documentation
 - `docs/Enterprise_HRMS_Presentation.pptx` for final presentation
 
+## Previous Uploaded Project
+
+The earlier uploaded GitHub project has been preserved inside:
+
+```text
+previous-upload/frontend
+previous-upload/backend
+```
+
+The final Enterprise HRMS submission is at the repository root.
+
 ## Environment Variables
 
 Frontend:
