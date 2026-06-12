@@ -187,4 +187,8 @@ app.get("/api/reports/salary.csv", auth, (req, res) => {
   res.type("text/csv").send(rows.join("\n"));
 });
 
-app.listen(PORT, () => console.log(`API running on http://localhost:${PORT}`));
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => console.log(`API running on http://localhost:${PORT}`));
+}
+
+export default app;

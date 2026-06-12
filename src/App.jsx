@@ -35,7 +35,7 @@ import {
 } from "lucide-react";
 import "./App.css";
 
-const API = import.meta.env.VITE_API_URL || "http://localhost:5001";
+const API = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? "" : "http://localhost:5001");
 const palette = ["#0f766e", "#2563eb", "#f59e0b", "#dc2626", "#7c3aed", "#16a34a"];
 
 function request(path, options = {}) {

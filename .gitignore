@@ -6,3 +6,4 @@ server/uploads/
 npm-debug.log*
 scripts-generate-docs.mjs
 scripts-generate-pdf.py
+.vercel
